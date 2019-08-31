@@ -9,6 +9,9 @@ LABEL "com.github.actions.description"="Markdown spell checker"
 LABEL "com.github.actions.icon"="package"
 LABEL "com.github.actions.color"="green"
 
+RUN apk --no-cache add curl jq && \
+    npm install -g markdown-spellcheck
+
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

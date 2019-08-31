@@ -2,16 +2,10 @@ name: markdown
 
 on:
   pull_request:
-    # TODO: GitHub Actions' globbing is v. confusing.
-    paths:
-      - '*.md'
-      - '**/*.md'
+    # TODO: GitHub Actions' globbing is v. confusing. How do we limit this to **/*.md?
   push:
     branches:
       - master
-    paths:
-      - '*.md'
-      - '**/*.md'
   schedule:
     - cron: 0 19 * * 2
 
@@ -26,5 +20,9 @@ jobs:
           fetch-depth: 1
       - name: markdown-spellcheck
         uses: ./.github/actions/markdown-spellcheck
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: write-good
         uses: ./.github/actions/write-good
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
