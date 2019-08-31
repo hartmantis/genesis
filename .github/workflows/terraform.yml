@@ -2,15 +2,10 @@ name: terraform
 
 on:
   pull_request:
-    # TODO: GitHub's path globbing seems to be different from Git's/Bash's.
-    # How do we recursively glob everything under terraform/?
-    paths:
-      - terraform/**
+    # TODO: GitHub Actions' globbing is v. confusing. How do we limit this to terraform/**/*?
   push:
     branches:
       - master
-    paths:
-      - terraform/**
   schedule:
     - cron: 0 19 * * 2
 
@@ -28,19 +23,23 @@ jobs:
         # Despite being in the GitHub actions docs, using "working-directory:"
         # throws an error about an invalid workflow file
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
       - name: terraform-init
         uses: hashicorp/terraform-github-actions/init@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
           TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
       - name: terraform-validate
         uses: hashicorp/terraform-github-actions/validate@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
       - name: terraform-plan
         uses: hashicorp/terraform-github-actions/plan@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
           TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
           TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
@@ -48,6 +47,7 @@ jobs:
         uses: hashicorp/terraform-github-actions/apply@master
         if: github.event_name == 'push' && github.ref == 'master'
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
           TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
           TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
