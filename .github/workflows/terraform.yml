@@ -36,18 +36,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
-      - name: terraform-plan
-        uses: hashicorp/terraform-github-actions/plan@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_ACTION_WORKING_DIR: terraform/
-          TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
-          TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
-      - name: terraform-apply
-        uses: hashicorp/terraform-github-actions/apply@master
-        if: github.event_name == 'push' && github.ref == 'master'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_ACTION_WORKING_DIR: terraform/
-          TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
-          TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      # TODO: The digitalocean_kubernetes_cluster resource's state includes private key
+      # data that can show up in the output of a plan or apply.
+      # - name: terraform-plan
+      #   uses: hashicorp/terraform-github-actions/plan@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     TF_ACTION_WORKING_DIR: terraform/
+      #     TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
+      #     TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      # - name: terraform-apply
+      #   uses: hashicorp/terraform-github-actions/apply@master
+      #   if: github.event_name == 'push' && github.ref == 'master'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     TF_ACTION_WORKING_DIR: terraform/
+      #     TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
+      #     TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
