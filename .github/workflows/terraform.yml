@@ -46,6 +46,7 @@ jobs:
       #     TF_ACTION_WORKING_DIR: terraform/
       #     TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
       #     TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      #     TF_VAR_gandi_key:${{ secrets.GANDI_KEY }}
       # - name: terraform-apply
       #   uses: hashicorp/terraform-github-actions/apply@master
       #   if: github.event_name == 'push' && github.ref == 'master'
@@ -54,3 +55,4 @@ jobs:
       #     TF_ACTION_WORKING_DIR: terraform/
       #     TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
       #     TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      #     TF_VAR_gandi_key:${{ secrets.GANDI_KEY }}

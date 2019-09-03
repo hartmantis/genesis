@@ -41,7 +41,7 @@ resource "kubernetes_cluster_role_binding" "tiller" {
 
 resource "helm_release" "istio-init" {
   name       = "istio-init"
-  repository = "${data.helm_repository.istio.metadata.0.name}"
+  repository = data.helm_repository.istio.metadata.0.name
   # The version shouldn't be required, but trying to `helm install istio.io/istio-init`
   # with an RC version results in "matching version '' not found in istio.io index".
   chart     = "${data.helm_repository.istio.metadata.0.name}/istio-init"

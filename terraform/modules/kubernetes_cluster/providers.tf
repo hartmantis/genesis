@@ -27,3 +27,7 @@ provider "helm" {
     cluster_ca_certificate = base64decode(digitalocean_kubernetes_cluster.default.kube_config.0.cluster_ca_certificate)
   }
 }
+
+provider "gandi" {
+  key = var.gandi_key
+}

@@ -24,3 +24,9 @@ variable "istio_version" {
   description = "The version of Istio to install"
   default     = "1.3.0-rc.1"
 }
+variable "gandi_key" {
+  description = "Gandi.net API key"
+}
+variable "domain" {
+  description = "A domain to give a wildcard DNS record pointed at Kubernetes' load balancer"
+}
