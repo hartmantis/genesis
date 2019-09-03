@@ -36,8 +36,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TF_ACTION_WORKING_DIR: terraform/
-      # TODO: The digitalocean_kubernetes_cluster resource's state includes private key
-      # data that can show up in the output of a plan or apply.
+      # TODO: It should be okay to reenable these if/when
+      # https://github.com/terraform-providers/terraform-provider-digitalocean/pull/289
+      # is released so the kubeconfig doesn't leak into the build log.
       # - name: terraform-plan
       #   uses: hashicorp/terraform-github-actions/plan@master
       #   env:
