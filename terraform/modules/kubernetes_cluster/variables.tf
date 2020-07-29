@@ -20,7 +20,3 @@ variable "node_size" {
   description = "The size of nodes in the default node pool"
   default     = "s-1vcpu-2gb"
 }
-variable "istio_version" {
-  description = "The version of Istio to install"
-  default     = "1.3.0-rc.1"
-}
