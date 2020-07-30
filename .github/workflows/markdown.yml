@@ -11,18 +11,14 @@ on:
 
 jobs:
   markdown:
-    name: markdown
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: markdown-spellcheck
-        uses: ./.github/actions/markdown-spellcheck
+      - uses: ./.github/actions/markdown-spellcheck
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: write-good
-        uses: ./.github/actions/write-good
+      - uses: ./.github/actions/write-good
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
