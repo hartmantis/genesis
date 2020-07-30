@@ -16,9 +16,5 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - uses: ./.github/actions/markdown-spellcheck
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: ./.github/actions/write-good
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: roboticcheese/github-action-cspell@v1
+      - uses: roboticcheese/github-action-write-good@v1
