@@ -11,46 +11,17 @@ on:
 
 jobs:
   terraform:
-    name: terraform
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
     steps:
-      - name: checkout
-        uses: actions/checkout@master
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: terraform-fmt
-        uses: hashicorp/terraform-github-actions/fmt@master
-        # Despite being in the GitHub actions docs, using "working-directory:"
-        # throws an error about an invalid workflow file
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_ACTION_WORKING_DIR: terraform/
-      - name: terraform-init
-        uses: hashicorp/terraform-github-actions/init@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_ACTION_WORKING_DIR: terraform/
-          TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
-      - name: terraform-validate
-        uses: hashicorp/terraform-github-actions/validate@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TF_ACTION_WORKING_DIR: terraform/
-      # TODO: It should be okay to reenable these if/when
-      # https://github.com/terraform-providers/terraform-provider-digitalocean/pull/289
-      # is released so the kubeconfig doesn't leak into the build log.
-      # - name: terraform-plan
-      #   uses: hashicorp/terraform-github-actions/plan@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     TF_ACTION_WORKING_DIR: terraform/
-      #     TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
-      #     TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
-      # - name: terraform-apply
-      #   uses: hashicorp/terraform-github-actions/apply@master
-      #   if: github.event_name == 'push' && github.ref == 'master'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     TF_ACTION_WORKING_DIR: terraform/
-      #     TF_ACTION_TFE_TOKEN: ${{ secrets.TERRAFORM_TOKEN }}
-      #     TF_VAR_digitalocean_token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TERRAFORM_TOKEN }}
+      - run: terraform fmt -recursive -diff
+      - run: terraform init
+      - run: terraform validate

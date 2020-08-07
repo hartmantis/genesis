@@ -10,7 +10,7 @@ variable "region" {
 # The "version" variable name is reserved in modules.
 variable "kubernetes_version" {
   description = "The Kubernetes version"
-  default     = "1.15.3-do.1"
+  default     = "1.18.6-do.0"
 }
 variable "node_count" {
   description = "The number of nodes in the default node pool"
@@ -19,8 +19,4 @@ variable "node_count" {
 variable "node_size" {
   description = "The size of nodes in the default node pool"
   default     = "s-1vcpu-2gb"
-}
-variable "istio_version" {
-  description = "The version of Istio to install"
-  default     = "1.3.0-rc.1"
 }
