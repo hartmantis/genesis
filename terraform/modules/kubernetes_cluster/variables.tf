@@ -20,3 +20,6 @@ variable "node_size" {
   description = "The size of nodes in the default node pool"
   default     = "s-1vcpu-2gb"
 }
+variable "domain" {
+  description = "The domain name to use with our ingress controller"
+}

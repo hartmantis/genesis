@@ -7,4 +7,5 @@ module "kubernetes_cluster" {
   digitalocean_token = var.digitalocean_token
   name               = "jdh"
   region             = "sfo2"
+  domain             = "yaml.zone"
 }
