@@ -2,17 +2,17 @@ terraform {
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "~> 1.22"
+      version = "~> 2.5"
     }
 
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 1.13"
+      version = "~> 2.0"
     }
 
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 1.3"
+      version = "~> 2.0"
     }
   }
 }
@@ -22,7 +22,6 @@ provider "digitalocean" {
 }
 
 provider "kubernetes" {
-  load_config_file       = false
   host                   = digitalocean_kubernetes_cluster.default.kube_config.0.host
   client_certificate     = base64decode(digitalocean_kubernetes_cluster.default.kube_config.0.client_certificate)
   client_key             = base64decode(digitalocean_kubernetes_cluster.default.kube_config.0.client_key)
@@ -31,7 +30,6 @@ provider "kubernetes" {
 
 provider "helm" {
   kubernetes {
-    load_config_file       = false
     host                   = digitalocean_kubernetes_cluster.default.kube_config.0.host
     client_certificate     = base64decode(digitalocean_kubernetes_cluster.default.kube_config.0.client_certificate)
     client_key             = base64decode(digitalocean_kubernetes_cluster.default.kube_config.0.client_key)
