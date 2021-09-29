@@ -10,7 +10,7 @@ variable "region" {
 # The "version" variable name is reserved in modules.
 variable "kubernetes_version" {
   description = "The Kubernetes version"
-  default     = "1.21.2-do.2"
+  default     = "1.21.3-do.0"
 }
 variable "node_count" {
   description = "The number of nodes in the default node pool"
