@@ -2,7 +2,7 @@ terraform {
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "~> 2.14"
+      version = "~> 2.16"
     }
 
     kubernetes = {
@@ -12,7 +12,7 @@ terraform {
 
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 2.3"
+      version = "~> 2.4"
     }
   }
 }
