@@ -1,5 +1,5 @@
 terraform {
-  required_version = "= 1.1.2"
+  required_version = "= 1.1.7"
 }
 
 module "kubernetes_cluster" {
