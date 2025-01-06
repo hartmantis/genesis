@@ -1,5 +1,5 @@
-# The Genesis Device
+# Genesis
 
-Everything to Terraform a dead planet into all my personal infrastructure.
+Everything to turn a barren wasteland of a planet into my personal infrastructure.
 
-![](https://thumbs.gfycat.com/QuickBronzeBeetle-size_restricted.gif)
+![The Genesis Device from Star Trek II: The Wrath of Khan](https://raw.githubusercontent.com/hartmantis/genesis/refs/heads/main/images/genesis.gif)
